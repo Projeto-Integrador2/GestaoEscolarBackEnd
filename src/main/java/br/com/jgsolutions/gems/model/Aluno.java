@@ -30,12 +30,13 @@ public class Aluno implements Serializable {
     private Long id;
 
     @NotNull
-    private String nome;
+    private String nomeAluno;
 
-    private String cpf;
-    private String email;
+    private String cpfAluno;
+    private String emailAluno;
+    private String telefoneAluno;
 
     @Column(length = 4000)
-    private String observacao;
+    private String observacaoAluno;
 
 }
