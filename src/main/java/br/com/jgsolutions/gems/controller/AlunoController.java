@@ -32,7 +32,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/aluno")
 //@Tag(name = "aluno", description = "API para CRUD de aluno")
 public class AlunoController {
 
@@ -41,7 +41,7 @@ public class AlunoController {
     @Autowired
     private AlunoService alunoService;
 
-    @GetMapping(value = "/aluno", consumes =
+    @GetMapping(value = "/", consumes =
             MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Page<Aluno>> findAll(
@@ -54,7 +54,7 @@ public class AlunoController {
         }
     }
 
-    @GetMapping(value = "/aluno/{id}", produces =
+    @GetMapping(value = "/{id}", produces =
             MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Aluno> findAlunoById(@PathVariable long id) {
         try {
@@ -67,12 +67,12 @@ public class AlunoController {
         }
     }
 
-    @PostMapping(value = "/aluno")
+    @PostMapping(value = "/")
     public ResponseEntity<Aluno> addAluno(@RequestBody Aluno aluno)
             throws URISyntaxException {
         try {
             Aluno novoAluno = alunoService.save(aluno);
-            return ResponseEntity.created(new URI("/api/aluno/" + novoAluno.getId())).body(aluno);
+            return ResponseEntity.created(new URI("/aluno/" + novoAluno.getId())).body(aluno);
         } catch (ResourceAlreadyExistsException ex) {
             logger.error(ex.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -81,7 +81,7 @@ public class AlunoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    @PutMapping(value = "/aluno/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Aluno> updateAluno(@Valid @RequestBody Aluno aluno, @PathVariable long id) {
         try {
             aluno.setId(id);
@@ -95,7 +95,7 @@ public class AlunoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    @DeleteMapping(path="/aluno/{id}")
+    @DeleteMapping(path="/{id}")
     public ResponseEntity<Void> deleteAlunoById(@PathVariable long id){
         try {
             alunoService.deleteById(id);

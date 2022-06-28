@@ -39,7 +39,7 @@ public class AlunoService {
     }
 
     public Aluno save(Aluno aluno) throws BadResourceException, ResourceAlreadyExistsException {
-        if(!StringUtils.isEmpty(aluno.getNome())) {
+        if(!StringUtils.isEmpty(aluno.getNomeAluno())) {
             if (aluno.getId() != null && existsById(aluno.getId())) {
                 throw new ResourceAlreadyExistsException("Aluno com id: " + aluno.getId() + " já existe");
             }
@@ -53,7 +53,7 @@ public class AlunoService {
     }
 
     public void update(Aluno aluno) throws BadResourceException, ResourceNotFoundException{
-        if (!StringUtils.isEmpty(aluno.getNome())){
+        if (!StringUtils.isEmpty(aluno.getNomeAluno())){
             if (!existsById(aluno.getId())){
                 throw  new ResourceNotFoundException("Aluno não encontrado com o id: " + aluno.getId());
             }

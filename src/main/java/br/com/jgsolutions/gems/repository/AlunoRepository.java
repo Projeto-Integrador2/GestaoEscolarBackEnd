@@ -9,8 +9,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface AlunoRepository extends PagingAndSortingRepository<Aluno, Long>, JpaSpecificationExecutor<Aluno> {
 
-    @Query(value = "select a from Aluno a where a.nome like %?1%")
-    Page<Aluno> findByNome(String nome, Pageable page);
+    @Query(value = "select a from Aluno a where a.nomeAluno like %?1%")
+    Page<Aluno> findByNome(String nomeAluno, Pageable page);
 
     Page<Aluno> findAll(Pageable page);
 
