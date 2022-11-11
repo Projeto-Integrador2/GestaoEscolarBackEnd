@@ -32,7 +32,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/curso")
+@RequestMapping("/gems/curso")
 //@Tag(name = "curso", description = "API para CRUD de curso")
 public class CursoController {
 

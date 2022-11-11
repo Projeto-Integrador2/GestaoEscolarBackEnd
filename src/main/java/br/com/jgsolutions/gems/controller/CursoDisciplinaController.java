@@ -37,7 +37,7 @@ public class CursoDisciplinaController {
     public ResponseEntity<CursoDisciplina> addCursoDisciplina(@RequestBody CursoDisciplina cursoDisciplina) throws URISyntaxException {
         try {
             CursoDisciplina p = cursoDisciplinaService.save(cursoDisciplina);
-            return ResponseEntity.created(new URI("/gems/cursoDisciplina/"+p.getId())).body(cursoDisciplina);
+            return ResponseEntity.created(new URI("/"+p.getId())).body(cursoDisciplina);
         }catch(ResourceAlreadyExistsException ex) {
             logger.error(ex.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
