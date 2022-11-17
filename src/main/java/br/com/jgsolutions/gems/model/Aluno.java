@@ -1,16 +1,14 @@
 package br.com.jgsolutions.gems.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "aluno")
 @Data
-public class Aluno implements Serializable {
+public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
