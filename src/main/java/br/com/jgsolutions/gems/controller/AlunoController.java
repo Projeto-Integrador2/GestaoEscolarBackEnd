@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 
@@ -19,14 +20,12 @@ public class AlunoController {
     @GetMapping(value = "/")
     @CrossOrigin("http://localhost:3000")
     public List<Aluno> buscarTodos() {
-        return alunoService.buscarTodos();
-    }
+        return alunoService.buscarTodos();}
 
     @PostMapping(value = "/")
     @CrossOrigin("http://localhost:3000")
     public Aluno inserir(@RequestBody Aluno aluno) {
-        return alunoService.inserir(aluno);
-    }
+        return alunoService.inserir(aluno);}
 
     @PutMapping(value = "/")
     @CrossOrigin("http://localhost:3000")

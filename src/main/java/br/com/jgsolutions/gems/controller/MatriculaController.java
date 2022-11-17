@@ -32,7 +32,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/matricula")
+@RequestMapping("/gems/matricula")
 //@Tag(name = "matricula", description = "API para CRUD de matricula")
 public class MatriculaController {
 
