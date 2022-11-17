@@ -3,13 +3,12 @@ package br.com.jgsolutions.gems.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "curso")
 @Data
-public class Curso implements Serializable {
+public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

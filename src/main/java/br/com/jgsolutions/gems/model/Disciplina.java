@@ -1,42 +1,26 @@
 package br.com.jgsolutions.gems.model;
 
-import java.io.Serializable;
+import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.sun.istack.NotNull;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "disciplina")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Getter
-@Setter
-public class Disciplina implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Data
+public class Disciplina {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    private String nomeDisciplina;
-
-    private String cpfDisciplina;
-    private String emailDisciplina;
-    private String telefoneDisciplina;
+    private String nome;
 
     @Column(length = 4000)
-    private String observacaoDisciplina;
+    private String observacao;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAtualizacao;
 }
