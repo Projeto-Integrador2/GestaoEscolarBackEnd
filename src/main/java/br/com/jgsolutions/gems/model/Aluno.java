@@ -15,16 +15,14 @@ public class Aluno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String nome;
 
-    @NotNull
-    private String nomeAluno;
-
-    private String cpfAluno;
-    private String emailAluno;
-    private String telefoneAluno;
+    private String cpf;
+    private String email;
+    private String telefone;
 
     @Column(length = 4000)
-    private String observacaoAluno;
+    private String observacao;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
