@@ -1,15 +1,12 @@
 package br.com.jgsolutions.gems.service;
 
-import br.com.jgsolutions.gems.exception.BadResourceException;
-import br.com.jgsolutions.gems.exception.ResourceAlreadyExistsException;
-import br.com.jgsolutions.gems.exception.ResourceNotFoundException;
 import br.com.jgsolutions.gems.model.Disciplina;
 import br.com.jgsolutions.gems.repository.DisciplinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class DisciplinaService {
@@ -17,66 +14,23 @@ public class DisciplinaService {
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
-    private boolean existsById(Long id){
-        return disciplinaRepository.existsById(id);
+    public List<Disciplina> buscarTodos() {
+        return disciplinaRepository.findAll();
     }
 
-    public Disciplina findById(Long id) throws ResourceNotFoundException {
-        Disciplina disciplina = disciplinaRepository.findById(id).orElse(null);
-        if(disciplina == null) {
-            throw new ResourceNotFoundException("Disciplina não encontrado com o id: " + id);
-        }
-        else return disciplina;
+    public Disciplina inserir(Disciplina disciplina) {
+        disciplina.setDataCriacao(new Date());
+        Disciplina disciplinaNovo = disciplinaRepository.saveAndFlush(disciplina);
+        return disciplinaNovo;
     }
 
-    public Page<Disciplina> findAll(Pageable pageable) {
-        return disciplinaRepository.findAll(pageable);
+    public Disciplina alterar(Disciplina disciplina) {
+        disciplina.setDataCriacao(new Date());
+        return disciplinaRepository.saveAndFlush(disciplina);
     }
 
-    public Page<Disciplina> findAllByNome(String nome, Pageable page) {
-        Page<Disciplina> disciplinas = disciplinaRepository.findByNome(nome, page);
-        return disciplinas;
+    public void excuir(Long id) {
+        Disciplina disciplina = disciplinaRepository.findById(id).get();
+        disciplinaRepository.delete(disciplina);
     }
-
-    public Disciplina save(Disciplina disciplina) throws BadResourceException, ResourceAlreadyExistsException {
-        if(!StringUtils.isEmpty(disciplina.getNomeDisciplina())) {
-            if (disciplina.getId() != null && existsById(disciplina.getId())) {
-                throw new ResourceAlreadyExistsException("Disciplina com id: " + disciplina.getId() + " já existe");
-            }
-            return disciplinaRepository.save(disciplina);
-        }
-        else {
-            BadResourceException exc = new BadResourceException("Erro ao salvar o disciplina");
-            exc.addErrorMessage("Disciplina está vazio ou é nulo");
-            throw exc;
-        }
-    }
-
-    public void update(Disciplina disciplina) throws BadResourceException, ResourceNotFoundException{
-        if (!StringUtils.isEmpty(disciplina.getNomeDisciplina())){
-            if (!existsById(disciplina.getId())){
-                throw  new ResourceNotFoundException("Disciplina não encontrado com o id: " + disciplina.getId());
-            }
-            disciplinaRepository.save(disciplina);
-        }
-        else {
-            BadResourceException exc = new BadResourceException("Falha ao salvar o disciplina");
-            exc.addErrorMessage("Disciplina está nulo ou em branco");
-            throw exc;
-        }
-    }
-
-    public void deleteById(Long id) throws  ResourceNotFoundException {
-        if (!existsById(id)) {
-            throw  new ResourceNotFoundException("Disciplina não encontrado com o id: " + id);
-        }
-        else{
-            disciplinaRepository.deleteById(id);
-        }
-    }
-
-    public Long count() {
-        return disciplinaRepository.count();
-    }
-
 }
