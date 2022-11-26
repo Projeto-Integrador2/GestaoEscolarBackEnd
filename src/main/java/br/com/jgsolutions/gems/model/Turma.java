@@ -1,32 +1,18 @@
 package br.com.jgsolutions.gems.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.sun.istack.NotNull;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import lombok.Data;
 
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "turma")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Getter
-@Setter
-public class Turma implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Data
+public class Turma {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
@@ -36,4 +22,8 @@ public class Turma implements Serializable {
 
     private String anoIngressoTurma;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAtualizacao;
 }
